@@ -1,5 +1,6 @@
 [tool.poetry]
 name = "django_ninja_auth"
+packages = [{include = "ninja_auth"}]
 version = "0.1.0"
 description = "Django authorization views adapted to django-ninja"
 authors = ["Martín Ugarte <contact@martinugarte.com>"]
