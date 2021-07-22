@@ -3,7 +3,7 @@
 Django Ninja Auth is a minimalistic python package that leverages the funcionalities of `django.contrib.auth` to backend-only [Django](https://www.djangoproject.com/) projects that use the exceptional [Django Ninja](https://django-ninja.rest-framework.com/).
 
 ## Install
-1. `pip install django-ninja-auth` (⚠️ Not ready!).
+1. `pip install django-ninja-auth`.
 2. Add the router to your `NinjaAPI`. Assuming you created a project according to [Django Ninja's tutorial](https://django-ninja.rest-framework.com/tutorial/) just follow this template in `api.py`:
 ```python
 from ninja import NinjaAPI
