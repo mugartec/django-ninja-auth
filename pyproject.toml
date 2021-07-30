@@ -1,10 +1,17 @@
 [tool.poetry]
 name = "django_ninja_auth"
-packages = [{include = "ninja_auth"}]
-version = "0.1.0"
+version = "0.1.2"
 description = "Django authorization views adapted to django-ninja"
-authors = ["Martín Ugarte <contact@martinugarte.com>"]
 license = "WTFPL"
+readme = "README.md"
+homepage = "https://github.com/mugartec/django-ninja-auth"
+repository = "https://github.com/mugartec/django-ninja-auth"
+keywords = ["django", "django-ninja", "auth"]
+packages = [{include = "ninja_auth"}]
+authors = ["Martín Ugarte <contact@martinugarte.com>"]
+include = [
+    "LICENSE",
+]
 
 [tool.poetry.dependencies]
 python = "^3.6"
