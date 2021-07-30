@@ -1,6 +1,6 @@
 from ninja import Router
 from ninja.security import django_auth
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
 
 from django.contrib.auth.forms import (
@@ -60,7 +60,9 @@ def request_password_reset(request, data: RequestPasswordResetIn):
              tags=_TGS,
              response={200: UserOut, 403: ErrorsOut, 204: None})
 def reset_password(request, data: SetPasswordIn):
+    User = get_user_model()
     user = User.objects.filter(username=data.username)
+
     if user.exists():
         user = user.get()
         if default_token_generator.check_token(user, data.token):
