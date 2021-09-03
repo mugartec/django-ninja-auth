@@ -1,6 +1,6 @@
 from ninja import Router
 from ninja.security import django_auth
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.tokens import default_token_generator
 
 from django.contrib.auth.forms import (
@@ -58,7 +58,7 @@ def request_password_reset(request, data: RequestPasswordResetIn):
 
 @router.post('/reset_password',
              tags=_TGS,
-             response={200: UserOut, 403: ErrorsOut, 204: None})
+             response={200: UserOut, 403: ErrorsOut, 422: None})
 def reset_password(request, data: SetPasswordIn):
     User = get_user_model()
     user = User.objects.filter(username=data.username)
@@ -72,7 +72,7 @@ def reset_password(request, data: SetPasswordIn):
                 django_login(request, user)
                 return user
             return 403, {'errors': dict(form.errors)}
-    return 204
+    return 422, None
 
 
 @router.post('/change_password',
@@ -83,5 +83,6 @@ def change_password(request, data: ChangePasswordIn):
     form = PasswordChangeForm(request.user, data.dict())
     if form.is_valid():
         form.save()
+        update_session_auth_hash()
         return 200
     return 403, {'errors': dict(form.errors)}
