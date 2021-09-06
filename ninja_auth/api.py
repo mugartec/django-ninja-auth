@@ -83,6 +83,6 @@ def change_password(request, data: ChangePasswordIn):
     form = PasswordChangeForm(request.user, data.dict())
     if form.is_valid():
         form.save()
-        update_session_auth_hash()
+        update_session_auth_hash(request, request.user)
         return 200
     return 403, {'errors': dict(form.errors)}
