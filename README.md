@@ -1,4 +1,4 @@
-# Django Ninja Auth: Use Django authorization infrastructure with Django Ninja
+# Django Ninja Auth: Use Django authentication infrastructure with Django Ninja
 
 Django Ninja Auth is a minimalistic python package that leverages the funcionalities of `django.contrib.auth` to backend-only [Django](https://www.djangoproject.com/) projects that use the exceptional [Django Ninja](https://django-ninja.rest-framework.com/).
 
