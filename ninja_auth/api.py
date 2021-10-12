@@ -27,16 +27,14 @@ from .schema import (
 
 router = Router()
 _TGS = ['Django Ninja Auth']
+_LOGIN_BACKEND = 'django.contrib.auth.backends.ModelBackend'
 
 
 @router.post('/', tags=_TGS, response={200: UserOut, 403: None}, auth=None)
 def login(request, data: LoginIn):
-    user = authenticate(
-        backend='django.contrib.auth.backends.ModelBackend',
-        **data.dict()
-    )
+    user = authenticate(backend=_LOGIN_BACKEND, **data.dict())
     if user is not None and user.is_active:
-        django_login(request, user)
+        django_login(request, user, backend=_LOGIN_BACKEND)
         return user
     return 403, None
 
@@ -83,7 +81,7 @@ def reset_password(request, data: SetPasswordIn):
             form = SetPasswordForm(user, data.dict())
             if form.is_valid():
                 form.save()
-                django_login(request, user)
+                django_login(request, user, backend=_LOGIN_BACKEND)
                 return user
             return 403, {'errors': dict(form.errors)}
     return 422, None
