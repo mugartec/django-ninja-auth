@@ -31,7 +31,10 @@ _TGS = ['Django Ninja Auth']
 
 @router.post('/', tags=_TGS, response={200: UserOut, 403: None})
 def login(request, data: LoginIn):
-    user = authenticate(**data.dict())
+    user = authenticate(
+        backend='django.contrib.auth.backends.ModelBackend',
+        **data.dict()
+    )
     if user is not None and user.is_active:
         django_login(request, user)
         return user
