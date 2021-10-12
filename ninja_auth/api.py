@@ -29,7 +29,7 @@ router = Router()
 _TGS = ['Django Ninja Auth']
 
 
-@router.post('/', tags=_TGS, response={200: UserOut, 403: None})
+@router.post('/', tags=_TGS, response={200: UserOut, 403: None}, auth=None)
 def login(request, data: LoginIn):
     user = authenticate(
         backend='django.contrib.auth.backends.ModelBackend',
@@ -52,7 +52,10 @@ def me(request):
     return request.user
 
 
-@router.post('/request_password_reset', tags=_TGS, response={204: None})
+@router.post('/request_password_reset',
+             tags=_TGS,
+             response={204: None},
+             auth=None)
 def request_password_reset(request, data: RequestPasswordResetIn):
     form = PasswordResetForm(data.dict())
     if form.is_valid():
@@ -68,7 +71,8 @@ def request_password_reset(request, data: RequestPasswordResetIn):
 
 @router.post('/reset_password',
              tags=_TGS,
-             response={200: UserOut, 403: ErrorsOut, 422: None})
+             response={200: UserOut, 403: ErrorsOut, 422: None},
+             auth=None)
 def reset_password(request, data: SetPasswordIn):
     User = get_user_model()
     user = User.objects.filter(username=data.username)
