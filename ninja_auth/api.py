@@ -1,4 +1,5 @@
 from ninja import Router
+from django.conf import settings
 from ninja.security import django_auth
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.tokens import default_token_generator
@@ -52,7 +53,13 @@ def me(request):
 def request_password_reset(request, data: RequestPasswordResetIn):
     form = PasswordResetForm(data.dict())
     if form.is_valid():
-        form.save(request=request)
+        form.save(
+            request=request,
+            extra_email_context=(
+                {'frontend_url': settings.FRONTEND_URL} if
+                hasattr(settings, 'FRONTEND_URL') else None
+            ),
+        )
     return 204, None
 
 
