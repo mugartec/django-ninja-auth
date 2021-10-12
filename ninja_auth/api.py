@@ -72,8 +72,9 @@ def request_password_reset(request, data: RequestPasswordResetIn):
              response={200: UserOut, 403: ErrorsOut, 422: None},
              auth=None)
 def reset_password(request, data: SetPasswordIn):
-    User = get_user_model()
-    user = User.objects.filter(username=data.username)
+    user_field = get_user_model().USERNAME_FIELD
+    user_data = {user_field: getattr(data, user_field)}
+    user = get_user_model().objects.filter(**user_data)
 
     if user.exists():
         user = user.get()

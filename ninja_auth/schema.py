@@ -4,23 +4,31 @@ from ninja.orm import create_schema
 from typing import Dict, List
 
 
+UsernameSchemaMixin = create_schema(
+    get_user_model(),
+    fields=[get_user_model().USERNAME_FIELD]
+)
+
+EmailSchemaMixin = create_schema(
+    get_user_model(),
+    fields=[get_user_model().EMAIL_FIELD]
+)
+
 UserOut = create_schema(
     get_user_model(),
     exclude=['password']
 )
 
 
-class LoginIn(Schema):
-    username: str
+class LoginIn(UsernameSchemaMixin):
     password: str
 
 
-class RequestPasswordResetIn(Schema):
-    email: str
+class RequestPasswordResetIn(EmailSchemaMixin):
+    pass
 
 
-class SetPasswordIn(Schema):
-    username: str
+class SetPasswordIn(UsernameSchemaMixin):
     new_password1: str
     new_password2: str
     token: str
