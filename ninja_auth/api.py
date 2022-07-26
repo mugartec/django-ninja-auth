@@ -27,7 +27,8 @@ from .schema import (
 
 router = Router()
 _TGS = ['Django Ninja Auth']
-_LOGIN_BACKEND = 'django.contrib.auth.backends.ModelBackend'
+_LOGIN_BACKEND = getattr(settings, "AUTHENTICATION_BACKENDS", 
+                        'django.contrib.auth.backends.ModelBackend')
 
 
 @router.post('/', tags=_TGS, response={200: UserOut, 403: None}, auth=None)
