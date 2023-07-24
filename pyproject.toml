@@ -14,8 +14,8 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.6"
-django-ninja = "^0.13.2"
+python = "^3.7"
+django-ninja = "^0.20.0"
 
 [tool.poetry.dev-dependencies]
 
