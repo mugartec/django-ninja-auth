@@ -30,7 +30,12 @@ _TGS = ['Django Ninja Auth']
 _LOGIN_BACKEND = 'django.contrib.auth.backends.ModelBackend'
 
 
-@router.post('/', tags=_TGS, response={200: UserOut, 403: None}, auth=None)
+@router.post(
+    '/',
+    tags=_TGS,
+    response={200: UserOut, 403: None},
+    auth=None
+)
 def login(request, data: LoginIn):
     user = authenticate(backend=_LOGIN_BACKEND, **data.dict())
     if user is not None and user.is_active:
@@ -50,10 +55,12 @@ def me(request):
     return request.user
 
 
-@router.post('/request_password_reset',
-             tags=_TGS,
-             response={204: None},
-             auth=None)
+@router.post(
+    '/request_password_reset',
+    tags=_TGS,
+    response={204: None},
+    auth=None
+)
 def request_password_reset(request, data: RequestPasswordResetIn):
     form = PasswordResetForm(data.dict())
     if form.is_valid():
@@ -66,11 +73,12 @@ def request_password_reset(request, data: RequestPasswordResetIn):
         )
     return 204, None
 
-
-@router.post('/reset_password',
-             tags=_TGS,
-             response={200: UserOut, 403: ErrorsOut, 422: None},
-             auth=None)
+@router.post(
+    '/reset_password',
+    tags=_TGS,
+    response={200: UserOut, 403: ErrorsOut, 422: None},
+    auth=None
+)
 def reset_password(request, data: SetPasswordIn):
     user_field = get_user_model().USERNAME_FIELD
     user_data = {user_field: getattr(data, user_field)}
@@ -88,10 +96,12 @@ def reset_password(request, data: SetPasswordIn):
     return 422, None
 
 
-@router.post('/change_password',
-             tags=_TGS,
-             response={200: None, 403: ErrorsOut},
-             auth=django_auth)
+@router.post(
+    '/change_password',
+    tags=_TGS,
+    response={200: None, 403: ErrorsOut},
+    auth=django_auth
+)
 def change_password(request, data: ChangePasswordIn):
     form = PasswordChangeForm(request.user, data.dict())
     if form.is_valid():
