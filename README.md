@@ -1,6 +1,6 @@
 # Django Ninja Auth: Use Django authentication infrastructure with Django Ninja
 
-Django Ninja Auth is a minimalistic python package that leverages the funcionalities of `django.contrib.auth` to backend-only [Django](https://www.djangoproject.com/) projects that use the exceptional [Django Ninja](https://django-ninja.rest-framework.com/).
+Django Ninja Auth is a small python package that leverages the funcionalities of `django.contrib.auth` to [Django](https://www.djangoproject.com/) projects that use on the exceptional [Django Ninja](https://django-ninja.rest-framework.com/). It is only intended to provide cookie-based authentication for front-end web applications.
 
 ## Install
 1. `pip install django-ninja-auth`.
@@ -18,7 +18,7 @@ api.add_router('/auth/', auth_router)
 If you followed the steps above, everything should be documented in your OpenAPI/Swagger UI under `your-api.com/api/docs`. No unnecessary documentation here 😎.
 
 ## CSRF
-Unfortunately, Django Ninja will [force you to use CSRF protection](https://django-ninja.rest-framework.com/tutorial/csrf/). It is your responsibility to build a front-end that takes care of this, adding it in the API's schema does not make sense.
+Unfortunately, Django Ninja will [force you to use CSRF protection](https://django-ninja.rest-framework.com/reference/csrf/). It is your responsibility to build a front-end that takes care of this, adding it in the API's schema does not make sense.
 
 If you ask me, I'd just use `SESSION_COOKIE_SAMESITE = 'strict'` and `SESSION_COOKIE_HTTPONLY = True` (default) and forget about CSRF attacks. "But there are old browsers that... 😭😭"   - If your cookies get stolen because you use Internet Explorer it's not my fault.
 
