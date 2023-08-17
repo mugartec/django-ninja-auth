@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django_ninja_auth"
-version = "0.1.5"
+version = "0.1.6"
 description = "Django authorization views adapted to django-ninja"
 license = "WTFPL"
 readme = "README.md"
@@ -14,8 +14,8 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.6"
-django-ninja = "^0.13.2"
+python = "^3.7"
+django-ninja = "^0.22.2"
 
 [tool.poetry.dev-dependencies]
 
