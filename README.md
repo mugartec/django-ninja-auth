@@ -14,6 +14,12 @@ api.add_router('/auth/', auth_router)
 ```
 3. Build the front-end infrastructure to interact with `your-api.com/api/auth/` 🚀.
 
+## Settings
+Set `DNA_USER_FIELDS_EXCLUDE` to a list of fieldnames to exclude from the
+output.
+
+Default: `['password']`
+
 ## Documentation
 If you followed the steps above, everything should be documented in your OpenAPI/Swagger UI under `your-api.com/api/docs`. No unnecessary documentation here 😎.
 
