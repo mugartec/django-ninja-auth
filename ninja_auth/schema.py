@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from ninja import Schema
 from ninja.orm import create_schema
 from typing import Dict, List
-
+from .settings import USER_EXCLUDE_FIELDS
 
 UsernameSchemaMixin = create_schema(
     get_user_model(),
@@ -16,7 +16,7 @@ EmailSchemaMixin = create_schema(
 
 UserOut = create_schema(
     get_user_model(),
-    exclude=['password']
+    exclude=USER_EXCLUDE_FIELDS
 )
 
 
